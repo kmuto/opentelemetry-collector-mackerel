@@ -1,7 +1,12 @@
 version: 2
 project_name: otelcol-mackerel
+
 env:
   - CGO_ENABLED=0
+# ↓はローカル作業用
+git:
+  ignore_tags:
+    - exporter/mackerelotlpexporter/v0.5.0
 release:
   use_existing_draft: true
 builds:
