@@ -49,10 +49,6 @@ nfpms:
       - src: otelcol-mackerel.conf
         dst: /etc/otelcol-mackerel/otelcol-mackerel.conf
         type: config|noreplace
-    scripts:
-      preinstall: preinstall.sh
-      postinstall: postinstall.sh
-      preremove: preremove.sh
     deb:
       scripts:
         templates: otelcol-mackerel.templates
@@ -60,26 +56,29 @@ nfpms:
       rpm:
         dependencies:
           - /bin/sh
+        scripts:
+          preinstall: preinstall.sh
+          postinstall: postinstall.sh
+          preremove: preremove.sh
       deb:
         dependencies:
           - debconf
         scripts:
-          # preinstall: null
           postinstall: postinstall-debian.sh
           postremove: postremove-debian.sh
-dockers_v2:
-  - id: otelcol-mackerel
-    ids:
-      - otelcol-mackerel-linux
-    images:
-      - mackerel/otelcol-mackerel
-      - ghcr.io/mackerelio/opentelemetry-collector-mackerel/otelcol-mackerel
-    tags:
-      - "{{.Version}}"
-      - latest
-    platforms:
-      - linux/amd64
-      #- linux/arm64
+#dockers_v2:
+#  - id: otelcol-mackerel
+#    ids:
+#      - otelcol-mackerel-linux
+#    images:
+#      - mackerel/otelcol-mackerel
+#      - ghcr.io/mackerelio/opentelemetry-collector-mackerel/otelcol-mackerel
+#    tags:
+#      - "{{.Version}}"
+#      - latest
+#    platforms:
+#      - linux/amd64
+#      - linux/arm64
 # monorepo setting is not available in GoReleaser free edition,
 # which means that running goreleaser with including monorepo tags will result in unintended version names.
 # The workaround is setting custom tags via `GORELEASER_CURRENT_TAG` and `GORELEASER_PREVIOUS_TAG` environment value.
