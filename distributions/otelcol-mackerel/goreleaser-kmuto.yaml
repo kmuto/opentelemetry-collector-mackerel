@@ -46,6 +46,9 @@ nfpms:
     contents:
       - src: otelcol-mackerel.service
         dst: /lib/systemd/system/otelcol-mackerel.service
+      - src: otelcol-mackerel.conf
+        dst: /etc/otelcol-mackerel/otelcol-mackerel.conf
+        type: config|noreplace
     scripts:
       preinstall: preinstall.sh
       postinstall: postinstall.sh
@@ -57,13 +60,11 @@ nfpms:
       rpm:
         dependencies:
           - /bin/sh
-        contents:
-          - src: otelcol-mackerel.conf
-            dst: /etc/otelcol-mackerel/otelcol-mackerel.conf
-            type: config|noreplace
       deb:
+        dependencies:
+          - debconf
         scripts:
-          preinstall: preinstall-debian.sh
+          # preinstall: null
           postinstall: postinstall-debian.sh
           postremove: postremove-debian.sh
 dockers_v2:
