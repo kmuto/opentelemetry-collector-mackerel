@@ -1,0 +1,6 @@
+Template: otelcol-mackerel/apikey
+Type: password
+Description: Mackerel API Key:
+  Please enter API key for the Mackerel organization to send.
+Description-ja.UTF-8: Mackerel APIキー:
+  送信するMackerelオーガニゼーションのAPIキーを入力してください。
