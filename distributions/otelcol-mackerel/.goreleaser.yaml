@@ -49,14 +49,19 @@ nfpms:
       - src: otelcol-mackerel.conf
         dst: /etc/otelcol-mackerel/otelcol-mackerel.conf
         type: config|noreplace
-    scripts:
-      preinstall: preinstall.sh
-      postinstall: postinstall.sh
-      preremove: preremove.sh
     overrides:
       rpm:
         dependencies:
           - /bin/sh
+        scripts:
+          preinstall: rpm/preinstall.sh
+          postinstall: rpm/postinstall.sh
+          preremove: rpm/preremove.sh
+      deb:
+        scripts:
+          postinstall: deb/postinstall.sh
+          preremove: deb/preremove.sh
+          postremove: deb/postremove.sh
 dockers_v2:
   - id: otelcol-mackerel
     ids:
